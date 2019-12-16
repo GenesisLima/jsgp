@@ -22,7 +22,7 @@ public class MaterialController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/salvar")
+	@RequestMapping("/remover")
 	public String removerMaterial(@RequestParam("id") Long id, RedirectAttributes redirectAttributes) {
        // redirectAttributes.addFlashAttribute("message", newFileMessage);
         materialService.delete(id);        

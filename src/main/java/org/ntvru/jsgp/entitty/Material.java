@@ -25,6 +25,7 @@ public class Material implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="material_id")
 	private long id;
 	@Column(nullable=false)
 	private String nome;

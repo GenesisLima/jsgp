@@ -6,22 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MaterialService {
+public class MaterialService implements JSGPService<Material>{
 
 	@Autowired
 	private MaterialDAO materialDAO;
 	
-	
+	@Override
 	 public void save(Material material) {
 		 materialDAO.save(material);
 		 
 	 }
-	 
+	
+	@Override
 	 public void delete(Long id) {
 		Material material =  materialDAO.findById(id).get();
 		if(material != null && material.getId()!=0) {
 		   material.setStatus("D");
 			materialDAO.save(material);
 		}
-	 } 
+	 }
+
+
 }
