@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.javamoney.moneta.Money;
@@ -37,6 +39,10 @@ public class Material implements Serializable {
 	private String unidade;
 	private int quantidade;
 	private Money precoMedio;
+	
+	@ManyToOne	
+	@JoinColumn(name="fk_especie_material")
+	private EspecieMaterial especieMaterial;
 	
 	
 	

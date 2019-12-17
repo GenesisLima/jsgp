@@ -16,12 +16,12 @@ public class EspecieMaterialController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	 public String form() {	  	 
-		  return "views/especiematerial/form";
+		  return "views/especiematerial/main";
 	 }
 	 
 	@RequestMapping(method=RequestMethod.POST)
 	 public String salvar(EspecieMaterial especieMaterial) {
 		 especieMaterialService.save(especieMaterial);
-		return "redirect:/especiematerial/list";
+		return "redirect:/";
 	 }
 }

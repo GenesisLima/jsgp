@@ -17,8 +17,5 @@ public class HomeController {
 		return "views/material/form";
 	}
 	
-//	@RequestMapping("tipomaterial")
-//	public String novoTipoMaterial() {
-//		return "views/tipomaterial/form";
-//	}
+
 }

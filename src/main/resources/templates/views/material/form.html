@@ -1,12 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html  xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<div th:insert="template/head.html">...</div>
 
-<head>
-<meta charset="ISO-8859-1">
-<title>Cadastrar Material</title>
-</head>
-<body>
+<div class="container">
 <div th:insert="template/menu.html"></div>
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
@@ -14,15 +7,15 @@
 <div class="panel panel-default">
   <div class="panel-heading">Cadastrar Material</div>
   <div class="panel-body">
-        <form role="form" method="post" action="/materialo">
+        <form role="form" method="post" action="/material">
            <div class="form-group">
-    <label for="product_id">ID:</label>
-    <input type="text" class="form-control" id="product_id" name="product_id" readonly="readonly" value="0">
+    <label for="material_id">ID:</label>
+    <input type="text" class="form-control" id="material_id" name="material_id" readonly="readonly" value="0">
   </div>
            <div class="form-group">
               <label for="name">Nome:</label>
               <div class="input-group">
-              <input type="text" class="form-control" id="name" name="name">
+              <input type="text" class="form-control" id="nome" name="nome">
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
               </span>
@@ -46,12 +39,12 @@
           
            
            <div class="form-group">
-            <label for="productGroup">Grupo de Produto:</label>
+            <label for="especieMaterial">Espécie do Material:</label>
             <div class="input-group">                            
-              <input type="text" class="form-control" id="productGroup" readonly="readonly" >
-              <input type="hidden" id="productGroupId" name="productGroupId" value="1"/>
+              <input type="text" class="form-control" id="especieMaterial" readonly="readonly" >
+              <input type="hidden" id="especieMaterialId" name="especieMaterialId" value="1"/>
               <span class="input-group-btn">
-              <a  class="btn btn-default" role="button" data-toggle="modal"  data-target="#modalGroup" ><span class="glyphicon glyphicon-search"></span>&nbsp;</a>
+              <a  class="btn btn-default" role="button" data-toggle="modal"  data-target="#modalEspecieMaterial" ><span class="glyphicon glyphicon-search"></span>&nbsp;</a>
             </span>
             </div>
             
@@ -68,8 +61,8 @@
              </div>
              
                <div class="form-group">
-              <label for="description">Descri&ccedil;&atilde;o:</label>
-              <textarea type="text" class="form-control" id="description" name="description"></textarea>
+              <label for="descricao">Descrição:</label>
+              <textarea type="text" class="form-control" id="descricao" name="descricao"></textarea>
            </div>
           <!-- Trigger the modal with a button -->
 
@@ -79,5 +72,78 @@
   </div>
       </div>
       </div>
-</body>
-</html>
+          <!-- /Begin modal EspecieMaterial-->
+ <div id="modalEspecieMaterial" class="modal fade" role="dialog" >
+  <div class="modal-dialog">
+ <form role="form" class="group">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Buscar Espécie do Material</h4>
+      </div>
+      <div class="modal-body">
+    <table id="especieMaterialTable">
+      <thead>
+        <tr>
+            <th>ID</th>
+<!--             <th>GRUPO</th> -->
+            <th>NOME</th>             
+            <th>AÇÃO</th>
+            
+        </tr>
+    </thead>   
+    </table> 
+  </form><!-- /end form-->
+      </div>
+      <div class="modal-footer">
+<!--         <button id="submit" class="btn btn-default" data-dismiss="modal">Salvar</button> -->
+        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+      </div>
+    
+    </div>
+
+  </div>
+</div><br/><br/><!-- /end modal EspecieMaterial-->
+</div>
+ <script type="text/javascript">
+       
+       $('#modalEspecieMaterial').on('show.bs.modal', function (e) {
+           $('#especieMaterialTable').DataTable( {
+           	retrieve: true,
+               "ajax":{url: '/api/v1/especiematerial?type=json', dataSrc:""},
+                "columns":[
+               	 {"data":"id"},
+               	 {"data":"nome"},               
+               	 {"defaultContent":'<a class="btn btn-mini" data-dismiss="modal" onclick="setEspecieMaterialValue(this)" >Escolher</a>'}
+               	 
+                ]
+               
+           } );
+         
+         var modal = $(this);
+
+   });
+       
+
+       function setEspecieMaterialValue(element){
+    	   
+    	   table = $('#especieMaterialTable').DataTable( { retrieve: true} );
+       	$('#especieMaterialTable tbody').on( 'click', 'tr', function () {
+      	   var row_data = table.row(this).data();
+             console.log("ROW DATA "+row_data.id+" - "+row_data.nome)
+       		$("#especieMaterialId").val(row_data.id);
+       		$("#especieMaterial").val(row_data.nome);
+     	});
+    	   
+        	$('#modalEspecieMaterial.in').modal('hide');
+      
+        }
+  
+    
+  
+       
+       
+       
+      
+</script>

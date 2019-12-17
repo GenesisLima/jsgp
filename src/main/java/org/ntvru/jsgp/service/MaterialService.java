@@ -1,5 +1,7 @@
 package org.ntvru.jsgp.service;
 
+import java.util.List;
+
 import org.ntvru.jsgp.entitty.Material;
 import org.ntvru.jsgp.repository.MaterialDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,12 @@ public class MaterialService implements JSGPService<Material>{
 			materialDAO.save(material);
 		}
 	 }
+
+	@Override
+	public List<Material> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 }
