@@ -1,6 +1,7 @@
-package org.ntvru.jsgp.entitty;
+package org.ntvru.jsgp.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
-import org.javamoney.moneta.Money;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 @Entity
@@ -30,16 +32,18 @@ public class Material implements Serializable {
 	@Column(name="material_id")
 	private long id;
 	@Column(nullable=false)
+	@NotBlank(message="O campo nome é obrigatório")
 	private String nome;
 	@Column
 	private String descricao;
 	@Column(columnDefinition="char(1) default 'A'")
-	private String status;
+	private String status = "A";
 	@Column
 	private String unidade;
-	private int quantidade;
-	private Money precoMedio;
+	@Column(name="preco_medio", columnDefinition="decimal(10,2)")
+	private BigDecimal precoMedio;
 	
+	@JsonIgnore
 	@ManyToOne	
 	@JoinColumn(name="fk_especie_material")
 	private EspecieMaterial especieMaterial;

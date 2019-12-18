@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import org.ntvru.jsgp.entitty.EspecieMaterial;
+import org.ntvru.jsgp.entity.EspecieMaterial;
 import org.ntvru.jsgp.repository.EspecieMaterialDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

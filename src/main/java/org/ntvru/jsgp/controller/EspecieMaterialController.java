@@ -1,6 +1,6 @@
 package org.ntvru.jsgp.controller;
 
-import org.ntvru.jsgp.entitty.EspecieMaterial;
+import org.ntvru.jsgp.entity.EspecieMaterial;
 import org.ntvru.jsgp.service.EspecieMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

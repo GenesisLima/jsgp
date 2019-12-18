@@ -10,4 +10,14 @@ public class JsgpApplication {
 		SpringApplication.run(JsgpApplication.class, args);
 	}
 
+//	@Bean
+//	public FilterRegistrationBean<MaterialFilter> materialFilterChain(){
+//		FilterRegistrationBean<MaterialFilter> filterBean 
+//	      = new FilterRegistrationBean<>();
+//		filterBean.setFilter(new MaterialFilter());		
+//		filterBean.addUrlPatterns("/material/*");
+//		return filterBean;
+//	}
+	
+
 }

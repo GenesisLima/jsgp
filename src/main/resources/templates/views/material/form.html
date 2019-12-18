@@ -21,20 +21,32 @@
               </span>
               </div>
            </div>
+           
+             <div class="form-group">
+              <label for="unidade">Unidade:</label>
+              <select id="unidade" name="unidade" class="form-control">
+              <option value="UN">Unidade</option>
+              <option value="CX">Caixa</option>
+              <option value="L">Litro</option>              
+               </select>             
+             </div>
+             
 <!--            <div class="form-group"> -->
-<!--               <label for="obtainment">Obten&ccedil;&atilde;o:</label> -->
-<!--               <textarea type="text" class="form-control" id="obtainment" name="obtainment"></textarea> -->
+<!--               <label for="quantidade">Quantidade:</label> -->
+<!--               <input type="number" class="form-control" id="quantidade" name="quantidade"></input> -->
 <!--            </div> -->
 
-<!--           <div class="form-group"> -->
-<!--               <label for="partner">Parceiro:</label> -->
-<!--              <input type="text" class="form-control" id="partner" name="partner"> -->
-<!--              </div> -->
+        
            
            
-<!--             <div class="form-group"> -->
-<!--               <label for="productionCost">Custo de Produ&ccedil;&atilde;o:</label> -->
-<!--              <input type="text" class="form-control" id="productionCost" name="productionCost"> -->
+            <div class="form-group">
+              <label for="precoMedio">Preço Médio:</label>
+             <input type="text" class="form-control" id="precoMedio" name="precoMedio">
+             </div>
+             
+<!--                <div class="form-group"> -->
+<!--               <label for="valor_total">Valor Total:</label> -->
+<!--              <input type="text" class="form-control" id="valor_total" name="valor_total"> -->
 <!--              </div> -->
           
            
@@ -106,8 +118,9 @@
   </div>
 </div><br/><br/><!-- /end modal EspecieMaterial-->
 </div>
+
  <script type="text/javascript">
-       
+// Modal programming
        $('#modalEspecieMaterial').on('show.bs.modal', function (e) {
            $('#especieMaterialTable').DataTable( {
            	retrieve: true,
@@ -140,8 +153,17 @@
       
         }
   
-    
-  
+// Money mask programming
+$(function(){
+	// $('#precoMedio').maskMoney();
+	$("#precoMedio").maskMoney(
+      {prefix:'R$ ',    	  
+    	  thousands:'.',
+    	  decimal:',',
+    	  affixesStay: false});
+})
+
+
        
        
        

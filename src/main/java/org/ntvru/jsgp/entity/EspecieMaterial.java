@@ -1,4 +1,4 @@
-package org.ntvru.jsgp.entitty;
+package org.ntvru.jsgp.entity;
 
 import java.io.Serializable;
 
