@@ -16,7 +16,7 @@ public class FuncionarioController {
 	private FuncionarioService funcionarioService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	 public String form() {	  	 
+	 public String main() {	  	 
 		  return "views/funcionario/main";
 	 }
 	
