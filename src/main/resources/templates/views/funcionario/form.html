@@ -1,0 +1,123 @@
+
+<div th:insert="template/menu.html"></div>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+      <!--  <h2>Cadastro de Servidor.</h2>-->
+<div class="panel panel-default">
+  <div class="panel-heading">Cadastrar Funcionario</div>
+  <div class="panel-body">
+   <form role="form" method="post" action="/funcionario">
+           <div class="form-group">
+    <label for="funcionario_id">ID:</label>
+    <input type="text" class="form-control" id="funcionario_id" name="funcionario_id" readonly="readonly" value="0">
+  </div>
+           <div class="form-group">
+              <label for="nome">Nome:</label>
+              <div class="input-group">
+              <input type="text" class="form-control" id="nome" name="nome">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+              </span>
+              </div>
+           </div>
+              <div class="form-group">
+              <label for="nome">Ramal:</label>
+              <div class="input-group">
+              <input type="text" class="form-control" id="ramal" name="ramal">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+              </span>
+              </div>
+           </div>
+
+             </div>
+             
+               <div class="form-group">
+              <label for="matricula">Matricula:</label>
+              <input type="text" class="form-control" id="matricula" name="matricula"></input>
+           </div>
+           
+            <div class="form-group">
+            <label for="departamento">Departamento:</label>
+            <div class="input-group">                            
+              <input type="text" class="form-control" id="departamento" readonly="readonly" >
+              <input type="hidden" id="departamento_id" name="departamento_id" value="1"/>
+              <span class="input-group-btn">
+              <a  class="btn btn-default" role="button" data-toggle="modal"  data-target="#modalDepartamento" ><span class="glyphicon glyphicon-search"></span>&nbsp;</a>
+            </span>
+            </div>
+
+ <button type="submit" class="btn btn-default">Salvar</button><br/><br/> 
+
+  </form><!-- /end form -->
+  </div>
+      </div>
+       <!-- /Begin modal EspecieMaterial-->
+ <div id="modalDepartamento" class="modal fade" role="dialog" >
+  <div class="modal-dialog">
+ <form role="form" class="group">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Buscar Departamento</h4>
+      </div>
+      <div class="modal-body">
+    <table id="departamentoTable">
+      <thead>
+        <tr>
+            <th>ID</th>
+<!--             <th>GRUPO</th> -->
+            <th>NOME</th>             
+            <th>AÇÃO</th>
+            
+        </tr>
+    </thead>   
+    </table> 
+  </form><!-- /end form-->
+      </div>
+      <div class="modal-footer">
+<!--         <button id="submit" class="btn btn-default" data-dismiss="modal">Salvar</button> -->
+        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+      </div>
+    
+    </div>
+
+  </div>
+</div><br/><br/><!-- /end modal EspecieMaterial-->
+      </div>
+       <script type="text/javascript">
+// Modal programming
+       $('#modalDepartamento').on('show.bs.modal', function (e) {
+           $('#departamentoTable').DataTable( {
+           	retrieve: true,
+               "ajax":{url: '/api/v1/departamento?type=json', dataSrc:""},
+                "columns":[
+               	 {"data":"id"},
+               	 {"data":"nome"},               
+               	 {"defaultContent":'<a class="btn btn-mini" data-dismiss="modal" onclick="setDepartamentoValues(this)" >Escolher</a>'}
+               	 
+                ]
+               
+           } );
+         
+         var modal = $(this);
+
+   });
+       
+
+       function setDepartamentoValues(element){
+    	   
+    	   table = $('#departamentoTable').DataTable( { retrieve: true} );
+       	$('#departamentoTable tbody').on( 'click', 'tr', function () {
+      	   var row_data = table.row(this).data();
+             console.log("ROW DATA "+row_data.id+" - "+row_data.nome)
+       		$("#departamentoId").val(row_data.id);
+       		$("#departamento").val(row_data.nome);
+     	});
+    	   
+        	$('#modalDepartamento.in').modal('hide');
+      
+        }
+</script>
+      

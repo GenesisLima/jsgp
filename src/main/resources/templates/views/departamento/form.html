@@ -1,0 +1,36 @@
+
+<div th:insert="template/menu.html"></div>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+      <!--  <h2>Cadastro de Servidor.</h2>-->
+<div class="panel panel-default">
+  <div class="panel-heading">Cadastrar Departamento</div>
+  <div class="panel-body">
+   <form role="form" method="post" action="/departamento">
+           <div class="form-group">
+    <label for="departamento_id">ID:</label>
+    <input type="text" class="form-control" id="departamento_id" name="departamento_id" readonly="readonly" value="0">
+  </div>
+           <div class="form-group">
+              <label for="nome">Nome:</label>
+              <div class="input-group">
+              <input type="text" class="form-control" id="nome" name="nome">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+              </span>
+              </div>
+           </div>
+
+             </div>
+             
+               <div class="form-group">
+              <label for="descricao">Descri&ccedil;&atilde;o:</label>
+              <textarea type="text" class="form-control" id="descricao" name="descricao"></textarea>
+           </div>
+
+ <button type="submit" class="btn btn-default">Salvar</button><br/><br/> 
+
+  </form><!-- /end form -->
+  </div>
+      </div>
+      </div>
