@@ -9,11 +9,11 @@
   <div class="panel-body">
         <form role="form" method="post" class="form-inline" action="/controlarMaterial">
           
-           <div class="form-group " >
-    <label for="controlematerial_id">ID:</label>
-    <input  type="text" size="10" class="form-control" id="controlematerial_id" name="controlematerial_id" readonly="readonly" value="0">
+<!--            <div class="form-group " > -->
+<!--     <label for="controlematerial_id">ID:</label> -->
+<!--     <input  type="text" size="10" class="form-control" id="controlematerial_id" name="controlematerial_id" readonly="readonly" value="0"> -->
     
-  </div>
+<!--   </div> -->
            <div class="form-group">
             <label for="material">Material:</label>
             <div class="input-group">                            
@@ -29,7 +29,7 @@
               <label for="quantidade">Quantidade:</label>
               <input type="number" class="form-control" style="width: 100px" id="quantidade" name="quantidade"></input>              
              </div>
-             
+            
           <div class="form-group">
               <label for="precoTotal">Preço Total:</label>
              <input type="text" class="form-control" id="precoTotal" name="precoTotal">
@@ -38,7 +38,7 @@
                 <div class="form-group">
             <label for="material">Funcionário:</label>
             <div class="input-group">                            
-              <input type="text"  size="30" class="form-control" id="funcionario"  readonly="readonly" >
+              <input type="text"  size="40" class="form-control" id="funcionario"  readonly="readonly" >
               <input type="hidden" id="funcionario_id" name="funcionario_id"/>
               <span class="input-group-btn">
               <a  class="btn btn-default" role="button" data-toggle="modal"  data-target="#modalFuncionario" ><span class="glyphicon glyphicon-search"></span>&nbsp;</a>
@@ -58,33 +58,23 @@
 <!--            </div> -->
           <!-- Trigger the modal with a button -->
 <!-- <br/><br/> -->
- <button type="submit" style="float:right; margin-right: 55px;" class="btn btn-default">Salvar</button><br/><br/> 
+
+             
+
+ <button type="button" class="btn btn-default btn-add" >Inserir</button>
+ <button type="submit" style="float:right; margin-right: 80px;" class="btn btn-default">Salvar</button><br/><br/>
      <hr style="margin-bottom:5px !important; margin-top:5px !important; " />
      
  <table class="table table-striped">
     <thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th >Material</th>
+        <th >Quantidade</th>
+        <th>Ação</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+     
     </tbody>
   </table>
   </form><!-- /end form -->
@@ -130,19 +120,101 @@
 </div>
 
  <script type="text/javascript">
-
  function setCurrentDate(elementId){
- 	var today = moment().format('YYYY-MM-DD');
- 	$("#"+elementId).val(today);
+	 	var today = moment().format('YYYY-MM-DD');
+	 	$("#"+elementId).val(today);
 
- }
+	 }
  
- $(document).ready(function(){
-	 setCurrentDate("dataRetirada");
+ function itemExists(component){
+	 $('.table').find('tbody').find('tr').each(function(index,element){
+		  tableColumn = $(element).find('td');
+		   if(tableColumn.text().trim() == tableColumn.text().trim()){
+			   return true;
+		   }else{
+			   return false;
+		   }
+	  });
+}
+ 
+ 
+  $(document).ready(function(){
+	 //Sets the current date to datepicker dataRetirada
+	  setCurrentDate("dataRetirada");
 	 console.log("data "+$("#dataRetirada").val());
 	 
+ $(document).on('click', '.btn-add', function(e){
+	  if($('#material').val().trim()!="" && ($('#quantidade').val().trim()!="" || $('#material').val() <= 0)){
+		 
+	     e.preventDefault();
+	     var existe = false;
+	     $('.table').find('tbody').find('tr').each(function(index,element){
+			  tableColumn = $(element).find('td');
+			   if(tableColumn.text().trim() == tableColumn.text().trim()){
+				  existe = true;
+			   }
+		  });
+	     if(!existe){
+	     
+	 if(!$('.table').find('tbody').find('tr').html()){		
+		 $('.table').find('tbody').append('<tr><td class="material"></td><td class="quantidade"></td><td class="acao"></td></tr>');
+
+	 }
+	 if(!$('.table').find('tbody').html()){
+		 console.log('table '+$('.table').find('tbody').html());
+
+	 }
+	 var materialTable = $('.table');
+	 var lastTableRow = materialTable.find('tr').last();
+//  	 $('.table').find('tr').first().remove();
+	 //TODO Verify if tr not exists
+	 cloneEntry = lastTableRow.clone();
+	 cloneEntry.find('td').each(function(index,element){
+         $(this).text('');
+ });
+	 $(cloneEntry).appendTo(materialTable); 
+// 	 for(var i=0; i < cloneEntry.find('td').length;i++){
+// 		 console.log(" ELEMENT "+$(cloneEntry.find('td')[i]).text);
+// 	 }
+   
+	 cloneEntry.find('td').each(function(index,element){
+		
+		 if($(cloneEntry.find('td')[index]).attr('class') == $('#material').attr('id')){
+		 $(cloneEntry.find('td')[index]).text($('#material').val());
+		 }
+		 if($(cloneEntry.find('td')[index]).attr('class') == $('#quantidade').attr('id')){
+			 $(cloneEntry.find('td')[index]).text($('#quantidade').val());
+			 }
+		 if($(cloneEntry.find('td')[index]).attr('class') == $('.acao').attr('class')){
+			 $(cloneEntry.find('td')[index]).html('<a href="#" class="btn btn-danger" role="button">Remover</a>');
+			 }
+		 
+        
+ });
+	     }else{
+	    	 alert('Item já inserido na lista. Por favor, escolha outro item!');
+	     }
+     }else{
+    	 alert("Os campos Material e Quantidade são obrigatórios.");
+     }
+ 
+	  $('.table').find('tbody').find('tr').each(function(index,element){
+		  if($(element).find('td').text().trim() ==""){
+			  console.log('vazio');
+			 $(element).remove();
+		  }
+	  })
+	 });
 	 
  });
+
+
+
+ 
+ 
+
+ 
+
  
  
 // Modal programming
@@ -186,7 +258,7 @@ $(function(){
     	  thousands:'.',
     	  decimal:',',
     	  affixesStay: false});
-})
+});
 
 
        
